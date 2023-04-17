@@ -1,3 +1,4 @@
+// record the replacement that should be done before do any replacement
 class Solution {
 public:
     string findReplaceString(string s, vector<int>& indices, vector<string>& sources, vector<string>& targets) {
@@ -37,5 +38,34 @@ public:
         if(i < s.size()) ans += s.substr(i, (s.size()-i));
 
         return ans;
+    }
+};
+
+// do the replacement from back to front
+// then it would not change the index of the substring that had not be checked
+class Solution {
+public:
+    string findReplaceString(string s, vector<int>& indices, vector<string>& sources, vector<string>& targets) {
+        int map[1005] = {0};
+
+        // record the original position
+        for(int i = 0; i < indices.size(); ++i){
+            map[indices[i]] = i;
+        }
+
+        // sort the indices (decreasing) to make replace easier
+        sort(indices.rbegin(), indices.rend());
+
+        for(int i = 0; i < indices.size(); ++i){
+            string source = sources[map[indices[i]]];
+            string target = targets[map[indices[i]]];
+            string tmp = s.substr(indices[i], source.size());
+            if(tmp == source){
+                s = s.substr(0, indices[i]) + target + s.substr(indices[i]+source.size());
+                cout << s << '\n';
+            }
+        }
+
+        return s;
     }
 };
