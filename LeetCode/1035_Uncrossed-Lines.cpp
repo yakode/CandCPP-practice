@@ -10,7 +10,7 @@ public:
         if(dp[i][j] != -1) return dp[i][j];
 
         if(nums1[i] == nums2[j])
-            return dp[i][j] = max(LCS(i+1, j+1, nums1, nums2)+1, max(LCS(i+1, j, nums1, nums2), LCS(i, j+1, nums1, nums2)));
+            return dp[i][j] = LCS(i+1, j+1, nums1, nums2) + 1;
         return dp[i][j] = max(LCS(i+1, j, nums1, nums2), LCS(i, j+1, nums1, nums2));
     }
 
