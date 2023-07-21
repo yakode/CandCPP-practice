@@ -25,3 +25,24 @@ public:
         return false;
     }
 };
+
+class Solution{
+public:
+    bool canJump(vector<int> &nums){
+        if(nums.size() == 1)
+            return true;
+
+        int i = 0, j = nums[0];
+
+        while(i <= j){
+            if(i >= nums.size() - 1)
+                return true;
+            if(i == j && nums[i] == 0)
+                return false;
+            j = max(j, i + nums[i]);
+            ++i;
+        }
+
+        return false;
+    }
+};
