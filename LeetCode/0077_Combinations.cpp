@@ -6,6 +6,8 @@ class Solution{
         }
         if(i > n)
             return;
+		if(n - i + 1 < k)
+			return;
 
         dfs(i + 1, n, k, tmp, ans);
         tmp[tmp.size() - k] = i;
